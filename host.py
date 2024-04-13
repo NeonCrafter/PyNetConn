@@ -49,6 +49,7 @@ class Host():
         """.encode())
                 for i in batched(data , sys.getsizeof(data) // self.SplitDataSize):
                     self.socket.send(i.encode())
+                self.socket.send("[ENDSPLITDATA]".encode())
             if self.sendSize == True:
                 self.socket.send(f"VARSIZE:{sys.getsizeof(data)}") 
             self.socket.send(str(data).encode())
